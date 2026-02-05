@@ -3,10 +3,10 @@
 
 <svg
    id="svg2422"
-   viewBox="0 0 800.00004 488.00002"
+   viewBox="0 0 784.7476 475.39421"
    version="1.0"
-   width="800"
-   height="488"
+   width="784.74756"
+   height="475.3942"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg"
@@ -608,7 +608,7 @@
   </defs>
   <g
      id="layer2"
-     transform="translate(-101.63837,-150.12137)">
+     transform="matrix(1.0191527,0,0,1,-118.87231,-156.42428)">
     <g
        transform="translate(-322.88242,-107.1333)"
        id="layer1">
@@ -1083,23 +1083,23 @@
     <text
        xml:space="preserve"
        style="font-size:11.7683px;line-height:0%;writing-mode:lr-tb;direction:ltr;fill:url(#linearGradient7);fill-opacity:1;stroke-width:0.980687"
-       x="90.102257"
+       x="131.36"
        y="484.2735"
        id="text1"
        transform="scale(0.99760861,1.0023971)"><tspan
          id="tspan1"
-         x="90.102257"
+         x="131.36"
          y="484.2735"
          style="font-size:261.517px;line-height:1.25;fill:url(#linearGradient7);fill-opacity:1;stroke-width:0.980687">+</tspan></text>
     <text
        xml:space="preserve"
-       style="font-size:11.7682px;line-height:0%;writing-mode:lr-tb;direction:ltr;fill:url(#linearGradient9);fill-opacity:1;stroke-width:0.980686"
-       x="701.56451"
+       style="font-size:11.7682px;line-height:0%;writing-mode:lr-tb;text-anchor:end;direction:ltr;fill:url(#linearGradient9);fill-opacity:1;stroke-width:0.980686"
+       x="871.92"
        y="483.16071"
        id="text1-6"
        transform="scale(0.99760862,1.0023971)"><tspan
          id="tspan1-7"
-         x="701.56451"
+         x="871.92"
          y="483.16071"
          style="font-size:261.517px;line-height:1.25;fill:url(#linearGradient9);fill-opacity:1;stroke-width:0.980686">+</tspan></text>
   </g>
