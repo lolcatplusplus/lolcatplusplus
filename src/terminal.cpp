@@ -28,6 +28,8 @@
 */
 
 #include "terminal.hpp"
+#include <cstdlib>
+#include <cstring>
 
 #ifdef _WIN32
 
@@ -45,5 +47,11 @@ namespace term {
 
 bool is_tty(const int fd) { return isatty(fd) != 0; }
 bool is_tty(FILE *stream) { return is_tty(fileno(stream)); }
+
+bool is_truecolor() {
+    const char *colorterm = std::getenv("COLORTERM");
+    return colorterm && (std::strstr(colorterm, "truecolor") || std::strstr(colorterm, "24bit"));
+}
+
 
 } // namespace term

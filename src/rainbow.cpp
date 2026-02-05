@@ -31,7 +31,6 @@
 #include "terminal.hpp"
 
 #include <cmath>
-#include <cstring>
 #include <format>
 #include <iostream>
 #include <numbers>
@@ -45,15 +44,10 @@ constexpr int rgb_to_256(const uint8_t r, const uint8_t g, const uint8_t b) {
     return 16 + (36 * (r / 51) + 6 * (g / 51) + (b / 51));
 }
 
-static bool is_truecolor() {
-    const char *colorterm = std::getenv("COLORTERM");
-    return colorterm && (std::strstr(colorterm, "truecolor") || std::strstr(colorterm, "24bit"));
-}
-
 Rainbow::Rainbow(const cli::Options &options) :
     m_spread(options.spread), m_speed(options.speed), m_freq(options.freq), m_duration(options.duration),
     m_color_offset(options.seed ? options.seed : static_cast<int>(std::random_device{}() % 256)),
-    m_invert(options.invert), m_animate(options.animate), m_truecolor_mode(options.truecolor || is_truecolor()),
+    m_invert(options.invert), m_animate(options.animate), m_truecolor_mode(options.truecolor || term::is_truecolor()),
     m_force_term(options.force) {}
 
 void Rainbow::process(std::istream &in) {

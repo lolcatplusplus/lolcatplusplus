@@ -17,5 +17,6 @@ constexpr std::string_view RESET_FOREGROUND = "\x1b[39m";
 
 bool is_tty(int fd);
 bool is_tty(FILE *stream);
+bool is_truecolor();
 
 } // namespace term
