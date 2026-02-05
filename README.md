@@ -77,7 +77,7 @@ Thereafter, just run
 cmake -S . -B build && cmake --build build --parallel
 ```
 
-You'll now have the executable in `build/cheese`
+You'll now have the executable in `build/lolcat`
 
 If you'd like to install the program, just run
 
