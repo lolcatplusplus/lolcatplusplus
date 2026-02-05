@@ -23,14 +23,14 @@ I've found that `fortune` + `cowsay` + `lolcat` is an impeccable combo.
 
 ## Getting it
 
-Just head over to the [releases](https://github.com/lov3b/lolcatplusplus/releases) and download it.
+Just head over to the [releases](https://github.com/lolcatplusplus/lolcatplusplus/releases) and download it.
 Here's some copy-paste scripts for your platform:
 
 ### Linux
 
 ```bash
 curl -L \
-    https://github.com/lov3b/lolcatplusplus/releases/latest/download/lolcat-linux-amd64 \
+    https://github.com/lolcatplusplus/lolcatplusplus/releases/latest/download/lolcat-linux-amd64 \
     -o /tmp/lolcat
 chmod +x /tmp/lolcat
 sudo mv -v /tmp/lolcat /usr/local/bin/lolcat
@@ -40,7 +40,7 @@ sudo mv -v /tmp/lolcat /usr/local/bin/lolcat
 
 ```bash
 curl -L \
-    https://github.com/lov3b/lolcatplusplus/releases/latest/download/lolcat-macos-arm64 \
+    https://github.com/lolcatplusplus/lolcatplusplus/releases/latest/download/lolcat-macos-arm64 \
     -o /tmp/lolcat
 chmod +x /tmp/lolcat
 sudo mv -v /tmp/lolcat /usr/local/bin/lolcat
@@ -50,7 +50,7 @@ sudo mv -v /tmp/lolcat /usr/local/bin/lolcat
 
 ```powershell
 Invoke-WebRequest `
-    -Uri "https://github.com/lov3b/lolcatplusplus/releases/latest/download/lolcat-windows-amd64.exe" `
+    -Uri "https://github.com/lolcatplusplus/lolcatplusplus/releases/latest/download/lolcat-windows-amd64.exe" `
     -OutFile "$env:TEMP\lolcat.exe"
 
 # Move the file to the install directory
