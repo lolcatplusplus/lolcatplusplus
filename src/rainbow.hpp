@@ -12,10 +12,6 @@ public:
     void process(std::istream &in);
 
 private:
-    [[nodiscard]] std::string rainbow(float freq, float pos) const;
-
-    [[nodiscard]] std::string format_color(uint8_t r, uint8_t g, uint8_t b) const;
-
     void print_line(const std::string &line) const;
 
     [[nodiscard]] bool is_tty() const;

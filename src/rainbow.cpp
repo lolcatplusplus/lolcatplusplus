@@ -64,20 +64,27 @@ void Rainbow::process(std::istream &in) {
         std::cout << term::show_cursor << term::reset;
 }
 
-std::string Rainbow::rainbow(const float freq, const float pos) const {
-    constexpr float pi = std::numbers::pi_v<float>;
-    const auto r = static_cast<uint8_t>(std::sin(freq * pos) * 127 + 128);
-    const auto g = static_cast<uint8_t>(std::sin(freq * pos + 2 * pi / 3) * 127 + 128);
-    const auto b = static_cast<uint8_t>(std::sin(freq * pos + 4 * pi / 3) * 127 + 128);
-    return format_color(r, g, b);
-}
 
-std::string Rainbow::format_color(const uint8_t r, const uint8_t g, const uint8_t b) const {
-    const auto bg_fg = m_invert ? 48 : 38;
-    if (m_truecolor_mode)
-        return ff::format("\x1b[{};2;{};{};{}m", bg_fg, r, g, b);
-    return ff::format("\x1b[{};5;{}m", bg_fg, rgb_to_256(r, g, b));
-}
+class Color {
+public:
+    Color(const float freq, const float pos) {
+        constexpr float pi = std::numbers::pi_v<float>;
+        r = static_cast<uint8_t>(std::sin(freq * pos) * 127 + 128);
+        g = static_cast<uint8_t>(std::sin(freq * pos + 2 * pi / 3) * 127 + 128);
+        b = static_cast<uint8_t>(std::sin(freq * pos + 4 * pi / 3) * 127 + 128);
+    }
+
+    [[nodiscard]] std::string format(const bool invert, const bool truecolor) const {
+        const auto bg_fg = invert ? 48 : 38;
+        if (truecolor)
+            return ff::format("\x1b[{};2;{};{};{}m", bg_fg, r, g, b);
+        return ff::format("\x1b[{};5;{}m", bg_fg, rgb_to_256(r, g, b));
+    }
+
+private:
+    uint8_t r, g, b;
+};
+
 
 void Rainbow::print_line(const std::string &line) const {
     static const std::regex pattern(R"((\x1B\[[0-?]*[ -/]*[@-~])|([^\x1B]))");
@@ -91,14 +98,15 @@ void Rainbow::print_line(const std::string &line) const {
             std::cout << match[1].str();
         } else if (match[2].matched) {
             const float pos = (static_cast<float>(m_color_offset + m_line_count + char_index)) / m_spread;
-            std::cout << rainbow(m_freq, pos) << match[2].str()
+            Color color(m_freq, pos);
+            std::cout << color.format(m_invert, m_truecolor_mode) << match[2].str()
                       << (m_invert ? term::RESET_BACKGROUND : term::RESET_FOREGROUND);
 
             if (m_animate) {
                 std::cout << std::flush;
                 std::this_thread::sleep_for(std::chrono::microseconds(static_cast<int>(1000000 / m_speed)));
             }
-            ++char_index;
+            char_index++;
         }
     }
     std::cout << '\n';
