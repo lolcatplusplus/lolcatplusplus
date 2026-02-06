@@ -21,16 +21,16 @@ jobs:
         include:
           - os: ubuntu-latest
             asset_name: lolcat-linux-amd64
-            install: sudo apt-get update; sudo apt-get install -y libboost-program-options-dev
+            install: sudo apt-get update; sudo apt-get install -y libboost-program-options-dev libboost-locale-dev libboost-iostreams-dev
 
           - os: macos-latest
             asset_name: lolcat-macos-arm64
-            install: brew install boost
+            install: brew install boost zstd
             cmake_args: "-DCMAKE_OSX_ARCHITECTURES=arm64"
 
           - os: windows-latest
             asset_name: lolcat-windows-amd64.exe
-            install: vcpkg install boost-program-options:x64-windows-static
+            install: vcpkg install boost-program-options:x64-windows-static boost-locale:x64-windows-static boost-iostreams:x64-windows-static
             cmake_args: "-DVCPKG_TARGET_TRIPLET=x64-windows-static -DCMAKE_TOOLCHAIN_FILE=C:/vcpkg/scripts/buildsystems/vcpkg.cmake"
 
     steps:
