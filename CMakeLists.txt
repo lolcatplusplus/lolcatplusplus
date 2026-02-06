@@ -25,7 +25,7 @@ check_include_file_cxx("format" HAS_FORMAT)
 if(NOT HAS_FORMAT)
     find_package(fmt REQUIRED)
 endif()
-find_package(Boost COMPONENTS program_options REQUIRED)
+find_package(Boost COMPONENTS program_options locale iostreams REQUIRED)
 
 configure_file(
         "${PROJECT_SOURCE_DIR}/src/version.hpp.in"

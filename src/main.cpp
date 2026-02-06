@@ -29,6 +29,7 @@
 
 #include "args.hpp"
 #include "rainbow.hpp"
+#include "input.hpp"
 
 #include <iostream>
 #include <fstream>
@@ -43,9 +44,9 @@ int main(const int argc, char *argv[]) {
             if (file == "-") {
                 rainbow.process(std::cin);
             } else {
-                std::ifstream fin(file);
-                if (!fin) throw std::runtime_error("Can't open file: " + file);
-                rainbow.process(fin);
+                auto stream = open_file(file);
+                if (!stream || !*stream) throw std::runtime_error("Can't open file: " + file);
+                rainbow.process(*stream);
             }
         }
     } catch (const std::exception &e) {

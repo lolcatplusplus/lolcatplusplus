@@ -1,5 +1,6 @@
 #include "ansiparser.hpp"
 #include "terminal.hpp"
+#include "utf-8.hpp"
 
 AnsiParser::Iterator &AnsiParser::Iterator::operator++() {
     if (m_posistion >= m_data.size()) {
@@ -12,7 +13,15 @@ AnsiParser::Iterator &AnsiParser::Iterator::operator++() {
                           (m_data[m_posistion + 1] == '[');
 
     if (!is_ansi_escape) {
-        m_current = {m_data.substr(m_posistion++, 1), false};
+        unsigned char c = static_cast<unsigned char>(m_data[m_posistion]);
+        size_t len = utf8::get_sequence_length(c);
+
+        if (m_posistion + len > m_data.size()) {
+            len = m_data.size() - m_posistion;
+        }
+
+        m_current = {m_data.substr(m_posistion, len), false};
+        m_posistion += len;
         return *this;
     }
 
