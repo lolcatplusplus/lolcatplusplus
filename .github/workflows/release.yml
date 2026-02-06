@@ -21,11 +21,11 @@ jobs:
         include:
           - os: ubuntu-latest
             asset_name: lolcat-linux-amd64
-            install: sudo apt-get update; sudo apt-get install -y libboost-program-options-dev libboost-locale-dev libboost-iostreams-dev
+            install: sudo apt-get update; sudo apt-get install -y libboost-program-options-dev libboost-locale-dev libboost-iostreams-dev libbz2-dev liblzma-dev
 
           - os: macos-latest
             asset_name: lolcat-macos-arm64
-            install: brew install boost zstd
+            install: brew install boost zstd xz bzip2
             cmake_args: "-DCMAKE_OSX_ARCHITECTURES=arm64"
 
           - os: windows-latest
@@ -50,6 +50,12 @@ jobs:
 
       - name: Configure & Build
         run: |
+          if ($IsMacOS) {
+            $zstd = (brew --prefix zstd).Trim()
+            $icu = (brew --prefix icu4c).Trim()
+            $env:CMAKE_PREFIX_PATH = $zstd + ":" + $icu + ":" + $env:CMAKE_PREFIX_PATH
+            $env:LIBRARY_PATH = $zstd + "/lib:" + $icu + "/lib:" + $env:LIBRARY_PATH
+          }
           cmake -S . -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_STATIC=ON ${{ matrix.cmake_args }}
           cmake --build build --config Release --parallel
 
