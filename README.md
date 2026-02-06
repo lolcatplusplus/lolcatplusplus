@@ -37,6 +37,23 @@ I'ts also cross-platform.
 Just head over to the [releases](https://github.com/lolcatpp/lolcatpp/releases) and download it.
 Here's some copy-paste scripts for your platform:
 
+### Arch Linux: AUR
+
+Use your prefered aur-helper and choose whether to compile from source, or to just grab the
+binary that the CI produces. This aur-package is updated automatically in the CI/CD.
+
+**From source:**
+
+```bash
+paru -S lolcat++
+```
+
+**Binary release:**
+
+```bash
+paru -S lolcat++-bin
+```
+
 ### Linux: from releases
 
 Grab the latest release from the releases with the following command.
