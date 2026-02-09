@@ -35,18 +35,14 @@ bool is_valid(std::string_view text) {
             return false; // Invalid start byte
 
         if (i + len > text.size())
-            return true; // Truncated sequence at end of chunk is OK for validation?
-        // Wait, this is for heuristic. If truncated at buffer end, it's ambiguous.
-        // But if we read 4KB and it ends in middle, we can't say it's invalid.
-        // Modified logic: If truncated, we assume Valid (don't fail).
+            return true;
 
-        // Check continuation bytes
+        // continuation bytes
         for (size_t j = 1; j < len; ++j) {
             if ((static_cast<unsigned char>(text[i + j]) & 0xC0) != 0x80)
                 return false;
         }
 
-        // Overlong encoding check
         if (len == 2 && c < 0xC2)
             return false;
 

@@ -29,14 +29,14 @@
 
 #include "args.hpp"
 #include "rainbow.hpp"
-#include "input.hpp"
 
-#include <iostream>
 #include <fstream>
+#include <iostream>
 
 int main(const int argc, char *argv[]) {
     const auto opt_args = cli::parse_args(argc, argv);
-    if (!opt_args) return EXIT_SUCCESS;
+    if (!opt_args)
+        return EXIT_SUCCESS;
 
     Rainbow rainbow(opt_args->args);
     try {
@@ -44,9 +44,10 @@ int main(const int argc, char *argv[]) {
             if (file == "-") {
                 rainbow.process(std::cin);
             } else {
-                auto stream = open_file(file);
-                if (!stream || !*stream) throw std::runtime_error("Can't open file: " + file);
-                rainbow.process(*stream);
+                std::ifstream fin(file);
+                if (!fin)
+                    throw std::runtime_error("Can't open file: " + file);
+                rainbow.process(fin);
             }
         }
     } catch (const std::exception &e) {

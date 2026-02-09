@@ -25,7 +25,7 @@ check_include_file_cxx("format" HAS_FORMAT)
 if(NOT HAS_FORMAT)
     find_package(fmt REQUIRED)
 endif()
-find_package(Boost COMPONENTS program_options locale iostreams REQUIRED)
+find_package(Boost COMPONENTS program_options REQUIRED)
 
 configure_file(
         "${PROJECT_SOURCE_DIR}/src/version.hpp.in"
@@ -38,7 +38,7 @@ file(GLOB_RECURSE SOURCES "${PROJECT_SOURCE_DIR}/src/*.cpp")
 
 add_executable(${CMAKE_PROJECT_NAME} ${SOURCES})
 
-target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Boost::program_options Boost::locale Boost::iostreams)
+target_link_libraries(${CMAKE_PROJECT_NAME} PRIVATE Boost::program_options)
 if(NOT HAS_FORMAT)
     target_compile_definitions(${PROJECT_NAME} PRIVATE USE_LIBFMT)
     target_link_libraries(${PROJECT_NAME} PRIVATE fmt::fmt)

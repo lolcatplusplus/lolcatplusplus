@@ -21,11 +21,11 @@ jobs:
         include:
           - os: ubuntu-latest
             asset_name: lolcat-linux-amd64
-            install: sudo apt-get update; sudo apt-get install -y libboost-program-options-dev libboost-locale-dev libboost-iostreams-dev libbz2-dev liblzma-dev
+            install: sudo apt-get update; sudo apt-get install -y libboost-program-options-dev
 
           - os: macos-latest
             asset_name: lolcat-macos-arm64
-            install: brew install boost zstd xz bzip2
+            install: brew install boost
             cmake_args: "-DCMAKE_OSX_ARCHITECTURES=arm64"
 
           - os: windows-latest
