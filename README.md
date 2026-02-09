@@ -61,16 +61,12 @@ paru -S lolcat++
 paru -S lolcat++-bin
 ```
 
-### Linux: from releases
+### Linux & macOS: from releases
 
 Grab the latest release from the releases with the following command.
 
 ```bash
-curl -L \
-    https://github.com/lolcatpp/lolcatpp/releases/latest/download/lolcat-linux-amd64 \
-    -o /tmp/lolcat
-chmod +x /tmp/lolcat
-sudo mv -v /tmp/lolcat /usr/local/bin/lolcat
+curl -sSL "https://raw.githubusercontent.com/lolcatpp/lolcatpp/master/scripts/install.sh" | bash
 ```
 
 ### macOS: Homebrew (recommended)
@@ -86,40 +82,12 @@ brew tap lolcatpp/tap
 brew install lolcatpp
 ```
 
-### macOS: from releases, only Apple Silicon
-
-Grab the latest release from the releases with the following command.
-Unfortunately it's a pain in the ass to compile to _x86_64_ for macOS on Github-Actions.
-We recommend that you use either the _homebrew-tap_ or compile manually from source.
-
-```bash
-curl -L \
-    https://github.com/lolcatpp/lolcatpp/releases/latest/download/lolcat-macos-arm64 \
-    -o /tmp/lolcat
-chmod +x /tmp/lolcat
-sudo mv -v /tmp/lolcat /usr/local/bin/lolcat
-```
-
 ### Windows: from releases (Administrator PowerShell)
 
 Grab the latest release from the releases, and update the `$PATH` variable, with the following command.
 
 ```powershell
-Invoke-WebRequest `
-    -Uri "https://github.com/lolcatpp/lolcatpp/releases/latest/download/lolcat-windows-amd64.exe" `
-    -OutFile "$env:TEMP\lolcat.exe"
-
-# Move the file to the install directory
-$installDir = "C:\Program Files\lolcat++"
-New-Item -ItemType Directory -Force -Path $installDir | Out-Null
-Move-Item -Force "$env:TEMP\lolcat.exe" "$installDir\lolcat.exe"
-
-# Update the $PATH variable, so that it can be used as "lolcat" in the shell
-$currentPath = [System.Environment]::GetEnvironmentVariable("Path", "Machine")
-if ($currentPath -notlike "*$installDir*") {
-    [System.Environment]::SetEnvironmentVariable("Path", $currentPath + ";$installDir", "Machine")
-    Write-Host "Installation complete! Please restart your terminal."
-}
+iwr -useb "https://raw.githubusercontent.com/lolcatpp/lolcatpp/master/scripts/install.ps1" | iex
 ```
 
 ### Building
