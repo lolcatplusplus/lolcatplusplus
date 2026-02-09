@@ -4,6 +4,8 @@
 
 # Lolcat++
 
+[![blazingly fast](https://www.blazingly.fast/api/badge.svg?repo=lolcatpp%2Flolcatpp)](https://www.blazingly.fast)
+
 A rewrite of the popular utility [_LOLCAT_](https://github.com/busyloop/lolcat) in C++.
 The rationale is that lolcat is often used in init scripts and such.
 It can at times be rather time-consuming to run it, since it's written in Ruby.
