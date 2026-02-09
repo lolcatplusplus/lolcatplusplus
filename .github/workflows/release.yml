@@ -182,7 +182,7 @@ jobs:
         working-directory: aur-repo
         run: |
           VERSION="${GITHUB_REF#refs/tags/v}"
-          bash ../main-repo/deployment/${{ matrix.script }} "$VERSION"
+          bash ../main-repo/scripts/${{ matrix.script }} "$VERSION"
 
       - name: Commit and Push
         working-directory: aur-repo
